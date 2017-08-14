@@ -1,7 +1,8 @@
 {% extends 'posts/base.html' %}
 {% block content %}
 <h1>Login</h1>
-
+<br/>
+<br/>
 {% if error %}
 {{ error }}
 
@@ -14,9 +15,11 @@
   {% endif %}
 
 <input type="text" name="username" placeholder="username"></input>
-<br>
+<br/>
+<br/>
 <input type="password" name="pswd" placeholder="password"></input>
-<br>
-<input type="submit" value="Login"/>
+<br/>
+<br/>
+<input class="btn btn-primary" type="submit" value="Login"/>
 </form>
 {% endblock %}
