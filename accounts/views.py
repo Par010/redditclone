@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponse, HttpResponseNotFound
 from posts.models import Post
 
 # Create your views here.
@@ -38,6 +39,9 @@ def logoutview(request):
         return redirect('home')
 
 def list(request, fk):
-    posts = Post.objects.filter(author__id=fk).order_by('-votes_total')
-    author = User.objects.get(pk=fk)
-    return render(request, "accounts/list.html", {'posts':posts, 'author':author})
+    try:
+        posts = Post.objects.filter(author__id=fk).order_by('-votes_total')
+        author = User.objects.get(pk=fk)
+        return render(request, "accounts/list.html", {'posts':posts, 'author':author})
+    except:
+        return HttpResponse("user not found")
